@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+
+</div>
+{% if notebooks %}
+<ul>
+	{% for notebook in notebooks %}
+	<li>
+		<form action="notebook/" method="POST">
+			{% csrf_token %}
+			<input type="hidden" name="guid_" value={{ notebook.guid }} />
+			<input type="submit" value = "{{ notebook.name }}"/>
+		</form>
+	</li>
+	{% endfor %}
+</ul>
+{% elif not notebooks %}
+<a href="/auth/">please authenticate</a>
+
+{% endif %}
+
+</div>
+{% endblock %}
